@@ -1,14 +1,13 @@
-let a = 10;
-let b = 20;
+const express = require('express')
+const app = express();
+app.get('', (_, res)=>{
+    res.send('Hello, this is home page')
+});
+app.get('/about', (_, res)=>{
+    res.send(' this is about page')
+});
+app.get('/help', (_, res)=>{
+    res.send(' this is help page')
+});
 
-
-
-new Promise((res, rej)=>{
-    setTimeout(()=>{
-        b = 90;
-        res(b);
-    },2000)
-}).then((data)=>{
-    b = data;
-    console.log(a+b)
-})
+app.listen(3000)
