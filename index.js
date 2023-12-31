@@ -9,12 +9,16 @@ app.set('view engine', 'ejs');
 app.get('', (_, res)=>{
     res.sendFile(`${publicPath}/index.html`)
 })
+app.get('/login ', (_, res)=>{
+    res.render('login')
+})
 
 app.get('/profile', (_, res)=>{
     const user = {
         name: 'Kunal',
         age: 22,
-        email: 'kunal@gmail.com'
+        email: 'kunal@gmail.com',
+        skills: ['php','js','python']
     }
     res.render('profile', {user});
 })
