@@ -1,20 +1,14 @@
-const http = require('http')
-const data = require('./data')
-http.createServer((_, res)=>{
-res.writeHead(200, {'content-type': 'application\json'})
-res.write(JSON.stringify(data));
-res.end();
-}).listen(3000)
+const fs = require('fs');
+const path = require('path');
+const dirPath = path.join(__dirname, 'Crud');
+const filePath = `${dirPath}/apple.txt`
+// fs.writeFileSync(filePath, 'This a company ')
+// fs.readFile(filePath,'utf-8', (_, item)=>{
+//     console.log(item)
+// })
 
-const fs = require('fs')
+// fs.appendFile(filePath, 'and this is the apple.txt file', (err)=>{
+//     if(!err) console.log('file is undated')
+// })
 
-const input = process.argv;
-
-// fs.writeFileSync(input[2], input[3]);
-if(input[2]=='add'){
-    fs.writeFileSync(input[3], input[4]);
-}else if(input[2]=='remove'){
-    fs.unlinkSync(input[3]);
-}else{
-    console.log('Invalid input')
-}
+fs.unlinkSync(`${dirPath}/fruit.txt`);
