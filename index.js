@@ -1,30 +1,22 @@
 const express = require('express')
 const path = require('path')
+const reqFilter = require('./middleware')
+const route = express.Router();
 
 
 const app = express();
 const publicPath = path.join(__dirname, 'public');
+route.use(reqFilter);
 
-const reqFilter = (req, res,next)=>{
-    if(!req.query.age){
-        res.send('Please provide age')
-    }
-    else if(req.query.age<18){
-        res.send('You can not access this page!!!')
-    }
-    else{
-        next()
-    }
-    
-}
 
-app.use(reqFilter);
+
+// app.use(reqFilter);
 
 app.set('view engine', 'ejs');
 
-app.get('', (_, res)=>{
-    res.sendFile(`${publicPath}/index.html`)
-})
+// app.get('', reqFilter, (_, res)=>{
+//     res.sendFile(`${publicPath}/index.html`)
+// })
 app.get('/login ', (_, res)=>{
     res.render('login')
 })
@@ -42,6 +34,10 @@ app.get('/profile', (_, res)=>{
 app.get('/about',(_,res)=>{
     res.sendFile(`${publicPath}/about.html`)
 })
+route.get('/contact',(_,res)=>{
+    res.send("welcome to contact page")
+})
+app.use('/', route);
 
 
 // app.use(express.static(publicPath))
