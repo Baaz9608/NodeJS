@@ -2,8 +2,8 @@ const {MongoClient} = require('mongodb');
 // const MongoClient = require('mongodb').MongoClient
 
 const url = 'mongodb://localhost:27017';
-const database = 'e-comm';
 const client = new MongoClient(url);
+const database = 'e-comm';
 
 // method 1
 async function dbConnect(){
