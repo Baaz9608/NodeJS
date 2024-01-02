@@ -56,7 +56,7 @@
 
 // app.listen(3000)
 
-const dbConnect = require('./mongodb')
+const dbConnect = require('./mongodb.js')
 const main =async ()=>{
     let data = await dbConnect();
     data = await data.find().toArray();
