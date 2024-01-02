@@ -1,12 +1,29 @@
 const express = require('express')
 const path = require('path')
-const reqFilter = require('./middleware')
+const reqFilter = require('./middleware.js')
 const route = express.Router();
 
 
 const app = express();
 const publicPath = path.join(__dirname, 'public');
 route.use(reqFilter);
+
+const {MongoClient} = require('mongodb');
+// const MongoClient = require('mongodb').MongoClient
+
+const url = 'mongodb://localhost:27017';
+const database = 'e-comm';
+const client = new MongoClient(url);
+
+async function getData(){
+    let result = await client.connect();
+    let db = result.db(database);
+    let collection = db.collection('products');
+    let res = await collection.find({}).toArray();
+    console.log(res)
+}
+getData();
+
 
 
 
