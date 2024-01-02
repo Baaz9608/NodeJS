@@ -1,12 +1,15 @@
  const mongoose = require('mongoose')
 
- const main = async()=>{
+ const saveInDB = async()=>{
     await mongoose.connect('mongodb://localhost:27017/e-comm');
     // schema validates the field in databases and define fields
     const productSchema = new mongoose.Schema(
         {
             name: String,
-
+            price: Number,
+            brand: String,
+            category: String,
+           
         }
     );
 
@@ -18,6 +21,27 @@
     console.log(result);
 }
 
-main();
+const updateInDB = async()=>{
+    const product = mongoose.model('products', productSchema);
+
+    let data = await product.updateOne(
+        {name: 'max 7'},
+        {$set: {price: 800, name:'max 8'}}
+    )
+    console.log(data);
+}
+
+const deleteInDB = async ()=>{
+    const product = mongoose.model('product', productSchema);
+    let data = await product.deleteOne({name: 'max 8'});
+    console.log(data);
+}
+
+const findInDB = async ()=>{
+    const product = mongoose.model('product', productSchema);
+    let data = await product.find();
+    console.log(data);
+}
+
 
  
