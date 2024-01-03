@@ -1,27 +1,5 @@
-const express = require('express')
-const EventEmitter = require('events');
-const app = express();
+let x=10;
+console.log(x++)
 
-const event = new EventEmitter();
-
-let count = 0;
-
-event.on('countAPI',()=>{
-    count++;
-    console.log('event called',count)
-})
-
-app.get('/',(req, res)=>{
-    res.send('APi called')
-    event.emit('countAPI')
-})
-
-app.get('/search',(req, res)=>{
-    res.send('search APi called')
-})
-
-app.get('/update',(req, res)=>{
-    res.send('update APi called')
-})
-
-app.listen(3000);
+// REPL(Read-Event-Print-Loop) -> command line tool of nodejs so that you can run the code of nodejs and javascript at a time
+// command lines are basically run 
