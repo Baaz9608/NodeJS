@@ -1,7 +1,27 @@
-const os = require('os');
-console.log(os.arch());
-console.log(os.freemem()/(1024*1024*1024));
-console.log(os.totalmem()/(1024*1024*1024));
-console.log(os.hostname());
-console.log(os.platform());
-console.log(os.userInfo());
+const express = require('express')
+const EventEmitter = require('events');
+const app = express();
+
+const event = new EventEmitter();
+
+let count = 0;
+
+event.on('countAPI',()=>{
+    count++;
+    console.log('event called',count)
+})
+
+app.get('/',(req, res)=>{
+    res.send('APi called')
+    event.emit('countAPI')
+})
+
+app.get('/search',(req, res)=>{
+    res.send('search APi called')
+})
+
+app.get('/update',(req, res)=>{
+    res.send('update APi called')
+})
+
+app.listen(3000);
